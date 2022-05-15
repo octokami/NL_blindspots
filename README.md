@@ -1,4 +1,4 @@
-# NL_blindspots
+# Blind Spot Map for Dutch playgrounds, parks and sports facilities
 Netherlands Blind spots for facilities within Playgrounds, Parks and Sports facilities
 
 * Dataset download at [Google Drive](https://drive.google.com/drive/folders/1DPCAAkYgqiUxpFv9uvmNaKuS928Dd5pj?usp=sharing)
