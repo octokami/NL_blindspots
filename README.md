@@ -7,4 +7,4 @@ Netherlands Blind spots for facilities within Playgrounds, Parks and Sports faci
 ## How to run
 1. Download the datasets
 2. Run the Notebook [Blind Spot Map](https://github.com/octokami/NL_blindspots/blob/main/Blind_spot_map.ipynb)
-3. Open app on the browser
+3. Open app on the browser [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
