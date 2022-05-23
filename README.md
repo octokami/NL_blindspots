@@ -1,4 +1,5 @@
-'''
+App available at https://blind-spot-map.herokuapp.com/
+
 **Blind Spot formulas:**
 * Playground demand = (% of children <15) + (Households with children) + (amount of births) - (cars per household) + (% rental homes)
 * Sport demand = - (age) - (Households with children) - (% female) + (%singles) + (education level) + (%unemployed) + (town size)
