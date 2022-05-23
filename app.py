@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import plotly
 import plotly.express as px
-import \
-    gunicorn  # whilst your local machine's webserver doesn't need this, Heroku's linux webserver (i.e. dyno) does. I.e. This is your HTTP server
+# whilst your local machine's webserver doesn't need this, Heroku's linux webserver (i.e. dyno) does. I.e. This is your HTTP server
+import gunicorn
 from whitenoise import WhiteNoise  # for serving static files on Heroku
 from sklearn.preprocessing import MinMaxScaler
 
@@ -25,7 +25,7 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callb
 # Reference the underlying flask app (Used by gunicorn webserver in Heroku production deployment)
 server = app.server
 
-# Enable Whitenoise for serving static files from Heroku (the /static folder is seen as root by Heroku) 
+# Enable Whitenoise for serving static files from Heroku (the /static folder is seen as root by Heroku)
 server.wsgi_app = WhiteNoise(server.wsgi_app, root='static/')
 
 app.layout = html.Div([
@@ -34,6 +34,7 @@ app.layout = html.Div([
 ])
 
 ### Index page ###
+
 
 index_page = html.Div([
     html.H1('Blind Spot Map for Dutch playgrounds, parks and sports facilities'),
@@ -154,13 +155,15 @@ From these findings we conclude the following contributors to increasing or decr
 
 **Datasets:**
 * Centraal Bureau voor de Statistiek, subject to the [Creative Commons Naamsvermelding (CC BY 4.0)](https://www.cbs.nl/nl-nl/over-ons/website/copyright)
-* Open Street Map, licensed under the [Open Data Commons Open Database License (ODbL)](https://www.openstreetmap.org/copyright) by the OpenStreetMap Foundation (OSMF)'''),
+* Open Street Map, licensed under the [Open Data Commons Open Database License (ODbL)](https://www.openstreetmap.org/copyright) by the OpenStreetMap Foundation (OSMF)
+
+### Built with ![Image](heart.png) in Python using [Dash](https://plotly.com/dash/)"""'''),
 ])
 
 ### Page 1 ###
-page_1_layout = html.Div([
-    html.H1('Blind Spot Map'),
-    html.Div([
+page_1_header = html.H1('Blind Spot Map')
+
+page_1_body = html.Div([
         # Map
         html.Div([
             html.B('Municipality', style={'font-size': '18px'}),
@@ -179,7 +182,7 @@ page_1_layout = html.Div([
                     dcc.Slider(min=0, max=1, value=0.7, id='slider_threshold'),
                 ], style={'width': '48%', 'float': 'left'}),
                 html.Div([
-                    html.B('Minimum distance to facilities', style={'font-size': '16px', 'text-align': 'right'}),
+                    html.B('Minimum distance to facilities (Km)', style={'font-size': '16px', 'text-align': 'right'}),
                     dcc.Input(value=1, type='number', id='input_distance'),
                 ], style={'width': '48%', 'float': 'right'})
             ], className='row'),
@@ -253,21 +256,22 @@ page_1_layout = html.Div([
 
         ], className='row', style={'width': '25%', 'float': 'right', 'display': 'inline-block'}),
 
-    ], className='row'),
+    ], className='row')
 
-    # Links
-    html.Br(),
-    dcc.Link('Go to Neighbourhood charts', href='/chart'),
-    html.Br(),
-    dcc.Link('Go back to the homepage', href='/'),
+# Footer
+page_1_footer = html.Div([
+        html.Br(),
+        dcc.Link('Go to Neighbourhood charts', href='/chart'),
+        html.Br(),
+        dcc.Link('Go back to the homepage', href='/'),
 
-    # Down Table
-    html.Div([
-        dbc.Container(id='tbl_out')
-    ], className='row'),
+        # Down Table
+        html.Div([
+            dbc.Container(id='tbl_out')
+        ], className='row'),
+    ])
 
-])
-
+page_1_layout = html.Div([page_1_header, page_1_body, page_1_footer])
 
 @app.callback(
     Output("map", "figure"),
@@ -406,7 +410,7 @@ def update_map(radio_input, municipality, slider_threshold, input_distance,
                 df.loc[index, 'play_demand'] = 0.0
 
                 # Filtering Demand threshold
-        df = df[df['play_demand'] > slider_threshold]
+        df = df[df['play_demand'] >= slider_threshold]
 
         # Map config: Steven's psychophysical law
         hover_data = ["play_demand", "play_distance"]
@@ -554,14 +558,10 @@ def make_charts(neighbourhood):
     df_neighbourhood.set_index('neighbourhood', inplace=True)
     df_municipality = df_municipalities.loc[df_municipalities['municipality'] == municipality]
     df_municipality.set_index('municipality', inplace=True)
-    df_municipality
 
     graph_df = pd.concat([df_neighbourhood, df_municipality, df_NL])
-    graph_df.loc[:, 'a_65+'] = graph_df.loc[:, 'citizens'] - graph_df.loc[:, 'a_00_14'] - graph_df.loc[:,
-                                                                                          'a_15_24'] - graph_df.loc[:,
-                                                                                                       'a_25_44'] - graph_df.loc[
-                                                                                                                    :,
-                                                                                                                    'a_45_64']
+    graph_df.loc[:, 'a_65+'] = graph_df.loc[:, 'citizens'] - graph_df.loc[:, 'a_00_14'] - \
+                               graph_df.loc[:,'a_15_24'] - graph_df.loc[:,'a_25_44'] - graph_df.loc[:,'a_45_64']
     graph_df = graph_df.T
     graph_df = round(graph_df.div(graph_df.iloc[0]) * 100, 0)
     graph_df = graph_df.drop(['citizens'])
@@ -595,7 +595,6 @@ def make_charts(neighbourhood):
     df_neighbourhood.set_index('neighbourhood', inplace=True)
     df_municipality = df_municipalities.loc[df_municipalities['municipality'] == municipality]
     df_municipality.set_index('municipality', inplace=True)
-    df_municipality
 
     graph_df = pd.concat([df_neighbourhood, df_municipality, df_NL])
     graph_df.loc[:, 'Others'] = graph_df.loc[:, 'citizens'] - graph_df.loc[:, 'low_edu'] - graph_df.loc[:,
@@ -626,4 +625,4 @@ def display_page(pathname):
 
 # Run flask app
 if __name__ == "__main__":
-    app.run_server(debug=False, host='0.0.0.0', port=8050)
+    app.run_server(debug=False, port=8050)
