@@ -13,7 +13,7 @@ In case you want to deploy the app yourself:
 ## Notes
 * After the first time running it you can set from_scratch = False to use the files already calculated.
 
-### Methodology
+# Methodology
 
 **Blind Spot formulas:**
 * Playground demand = (% of children <15) + (Households with children) + (amount of births) - (cars per household) + (% rental homes)
@@ -34,7 +34,7 @@ For each attribute present in the demand formula:
 
 4. The Minimum demand value sets what is the minimum value that should be seen on the map
 
-### References
+## References
 * Playground
 
 article:https://sitelines.com/articles/2017/11/playground-planning-101-location-location-location/ 
@@ -116,6 +116,6 @@ The frequency to which people visit a park greatly decreases when the distance t
 
 From these findings we conclude the following contributors to increasing or decreasing the demand value of park and nature: Residents that meet the earlier described criteria, and live further than 1000m from a park, might have increased demand for parks & nature. 
 
-### Datasets
+## Datasets
 * Centraal Bureau voor de Statistiek, subject to the [Creative Commons Naamsvermelding (CC BY 4.0)](https://www.cbs.nl/nl-nl/over-ons/website/copyright)
 * Open Street Map, licensed under the [Open Data Commons Open Database License (ODbL)](https://www.openstreetmap.org/copyright) by the OpenStreetMap Foundation (OSMF)
