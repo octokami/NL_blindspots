@@ -1,11 +1,24 @@
+# Blind Spot Map for Dutch playgrounds, parks and sports facilities
 App available at https://blind-spot-map.herokuapp.com/
+
+Video demo at https://www.youtube.com/watch?v=LzxwGOesutk&ab_channel=CamilaMatoba
+
+In case you want to deploy the app yourself:
+# Deployment
+1. Download the datasets at https://drive.google.com/drive/folders/1DPCAAkYgqiUxpFv9uvmNaKuS928Dd5pj?usp=sharing
+    1.1. There is a metadata file with explanations and sources
+2. Download the notebook https://github.com/octokami/NL_blindspots/blob/main/utils/Blind_spot_map.ipynb
+3. Open the app on your local browser at http://127.0.0.1:8050/
+
+## Notes
+* After the first time running it you can set from_scratch = False to use the files already calculated.
+
+### Methodology
 
 **Blind Spot formulas:**
 * Playground demand = (% of children <15) + (Households with children) + (amount of births) - (cars per household) + (% rental homes)
 * Sport demand = - (age) - (Households with children) - (% female) + (%singles) + (education level) + (%unemployed) + (town size)
 * Park demand = - (age) + (Households with children) + (% female) + (%singles) + (education level)
-
-**Methodology**
 
 For each attribute present in the demand formula:
 
@@ -21,23 +34,18 @@ For each attribute present in the demand formula:
 
 4. The Minimum demand value sets what is the minimum value that should be seen on the map
 
-**References**
+### References
 * Playground
 
 article:https://sitelines.com/articles/2017/11/playground-planning-101-location-location-location/ 
-Creating a playground for the children of the community to enjoy is best if you pick a location that can serve the most kids. A good rule of thumb is to select a site that is within walking distance to the greatest number of families. Choose a site that is close to:
+Creating a playground for the children of the community to enjoy is best if you pick a location that can serve the most kids. A good rule of thumb is to select a site that is within walking distance to the greatest number of families. Choose a site that is close to: Highly populated neighborhoods, Schools, Entertainment facilities, Libraries, Trails and outdoor hotspots
 
-
-Highly populated neighborhoods
-Schools
-Entertainment facilities
-Libraries
-Trails and outdoor hotspots
 https://www.miracle-recreation.com/blog/ultimate-guide-planning-your-playground/?lang=can#space-considerations-when-planning-playground 
 Knowing who the playground is intended for will help you decide what type of equipment to install. Children play differently and are at various levels of development at different ages. For instance, a playground designed for a 5-year-old won’t appeal to a 12-year-old, and might not be the appropriate size for them. Likewise, toddlers and younger children will have difficulty using playground equipment designed for 5- or 7-year-olds.
+
 https://www.jstor.org/stable/pdf/44659555.pdf 
 The children's playground, for boys and girls under twelve, with sand pits, baby hammocks, etc., and a woman teacher in charge. 
-Special facilities depending upon local opportunities, such as swimming
+Special facilities depending upon local opportunities, such as swimming.
 
 Based on the above literature, I propose the following variables to build a demand model on:
 Children under 15 years old, data on cbs website: https://opendata.cbs.nl/?dl=57C47#/CBS/nl/dataset/85039NED/table 
@@ -46,13 +54,13 @@ Birth total:
 https://opendata.cbs.nl/?dl=57C47#/CBS/nl/dataset/85039NED/table 
 Household income: (no source on this in CBS)
 https://frw.studenttheses.ub.rug.nl/3781/1/BaPo_thesis_finalversion_DavidSnippe.pdf low income implies more use of parks
-Cars per household
-Percentage rental homes
+
 
 * Sports facilities
 
-Dutch study that uses Age, gender, level of education, employment(binary), children living at home (binary), Neighbourhood safety and Neighbourhood Socio-economic status
-Article: Do objective neighbourhood characteristics relate to residents’ preferences for certain sports locations? A cross-sectional study using a discrete choice modelling approach https://www.researchgate.net/publication/321738962_Do_objective_neighbourhood_characteristics_relate_to_residents%27_preferences_for_certain_sports_locations_A_cross-sectional_study_using_a_discrete_choice_modelling_approach
+
+Article: [Do objective neighbourhood characteristics relate to residents’ preferences for certain sports locations? A cross-sectional study using a discrete choice modelling approach](https://www.researchgate.net/publication/321738962_Do_objective_neighbourhood_characteristics_relate_to_residents%27_preferences_for_certain_sports_locations_A_cross-sectional_study_using_a_discrete_choice_modelling_approach)
+Dutch study that uses Age, gender, level of education, employment(binary), children living at home (binary), Neighbourhood safety and Neighbourhood Socio-economic status.
 
 Economic and demographic factors: (age, ethnicity, education, and health)
 Decrease of participation with increasing age, for men even stronger than for women—men more likely to participate in sport—women have different preferences regarding the type of sport—married people participate less in sport than singles—ethnic minorities participate less in sports than whites— negative effect of poor health—positive impact of household income and education—unemployed participate more in sports
@@ -60,9 +68,8 @@ Decrease of participation with increasing age, for men even stronger than for wo
 Article: Investigating the Economic and Demographic Determinants of Sporting Participation in England
 https://www.jstor.org/stable/3559931
 
+Article: [Economic Determinants of Participation in Physical Activity and Sport](https://ideas.repec.org/p/spe/wpaper/0613.html)
 Positive effect of income—employed persons less likely to participate in sport—negative effect of age—positive effect of educational level—females less likely to participate than males—Blacks and Hispanics less likely to participate than Whites.
-Article: Economic Determinants of Participation in Physical Activity and Sport
-https://ideas.repec.org/p/spe/wpaper/0613.html
 
 Lera-López and Rapún-Gárate:
 Women are less likely to participate in sport than men—positive influence of age—education is positively related to the frequency of sport participation—income level has no influence on sport participation—being employed is negatively related to the frequency of sport participation.
@@ -70,7 +77,6 @@ Women are less likely to participate in sport than men—positive influence of a
 Hovemann and Wicker:
 European model: age, relationship, Having children and occupation have a negative effect—education years and town size have a significant positive influence.
 https://www.researchgate.net/publication/346161866_Sports_facilities%27_location_and_participation_in_sports_among_working_adults
-
 
 About age:
 3–18: Higher demand of Swimming pools
@@ -86,7 +92,6 @@ https://link.springer.com/article/10.1007/s11556-010-0066-5
 * Parks
 
 Paper: https://www.sciencedirect.com/science/article/pii/S1353829210000316
-
 This meta study investigates all the important factors and features amongst different sample groups that influence the attractiveness of parks. A few features were deemed most important across multiple studies: Condition, accessibility, aesthetics, and safety. 
 
 Interestingly, women have more appreciation for parks & greenery close to home. The paper states that parks provide opportunities to socialize in safe and supportive social environments appeared to be important, notably for women and girls. This finding is also supported by other papers, such as: https://www.sciencedirect.com/science/article/pii/S2213078020300463?casa_token=dRnI7X6FR6IAAAAA:HFTd0DnnXG_uOe82bvKIt1t8PH2IXJ_GD5j1KlmmQz2Sl9b15CLhJw5PZgmyUCW7qKrVZOatRZ4#bib42
@@ -111,6 +116,6 @@ The frequency to which people visit a park greatly decreases when the distance t
 
 From these findings we conclude the following contributors to increasing or decreasing the demand value of park and nature: Residents that meet the earlier described criteria, and live further than 1000m from a park, might have increased demand for parks & nature. 
 
-**Datasets:**
+### Datasets
 * Centraal Bureau voor de Statistiek, subject to the [Creative Commons Naamsvermelding (CC BY 4.0)](https://www.cbs.nl/nl-nl/over-ons/website/copyright)
 * Open Street Map, licensed under the [Open Data Commons Open Database License (ODbL)](https://www.openstreetmap.org/copyright) by the OpenStreetMap Foundation (OSMF)
