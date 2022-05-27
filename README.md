@@ -12,6 +12,23 @@ In case you want to deploy the app yourself:
 
 ## Notes
 * After the first time running it you can set from_scratch = False to use the files already calculated.
+* Data from [Overpass-turbo](https://overpass-turbo.eu/) can be extrated with code such as:
+'''
+[out:json][timeout:99];
+// gather results
+(
+  area["ISO3166-1"="NL"][admin_level=2];
+  (
+	node["leisure"="fitness_centre"](area);
+	node["leisure"="sports_centre"](area);
+  );
+);
+// print results
+out body;
+>;
+out skel qt;
+'''
+Other types of locations can be found on the [OSM Wiki](https://wiki.openstreetmap.org/wiki/Key:leisure)
 
 # Methodology
 
