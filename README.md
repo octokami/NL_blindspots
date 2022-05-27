@@ -12,7 +12,8 @@ In case you want to deploy the app yourself:
 
 ## Notes
 * After the first time running it you can set from_scratch = False to use the files already calculated.
-* Data from [Overpass-turbo](https://overpass-turbo.eu/) can be extrated with a query such as:
+* Downloading Geographical data:
+1. Download data from [Overpass-turbo](https://overpass-turbo.eu/): can be extrated with a query such as
 ```
 [out:json][timeout:99];
 // gather results
@@ -29,6 +30,9 @@ out body;
 out skel qt;
 ```
 Other types of locations can be found on the [OSM Wiki](https://wiki.openstreetmap.org/wiki/Key:leisure)
+
+2. Make [neighbourhood_to_coordinate.csv](https://github.com/octokami/NL_blindspots/blob/main/utils/1_make_neighbourhood_to_coordinate.ipynb)
+3. Make [neighbourhood_distances.csv](https://github.com/octokami/NL_blindspots/blob/main/utils/2_make_neighbourhood_distances.ipynb)
 
 # Methodology
 
