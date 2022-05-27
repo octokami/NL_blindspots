@@ -12,7 +12,7 @@ In case you want to deploy the app yourself:
 
 ## Notes
 * After the first time running it you can set from_scratch = False to use the files already calculated.
-* Data from [Overpass-turbo](https://overpass-turbo.eu/) can be extrated with code such as:
+* Data from [Overpass-turbo](https://overpass-turbo.eu/) can be extrated with a query such as:
 ```
 [out:json][timeout:99];
 // gather results
