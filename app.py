@@ -438,7 +438,7 @@ def update_map(radio_input, municipality, slider_threshold, input_distance,
         df = df[df['park_demand'] > slider_threshold]
 
         # Map config
-        hover_data = ["park_demand", "park_demand"]
+        hover_data = ["park_demand", "park_distance"]
         size = df['park_demand'].apply(lambda x: x ** (1 / 0.7))
 
     if (radio_input == "Sports Facilities"):
@@ -464,7 +464,7 @@ def update_map(radio_input, municipality, slider_threshold, input_distance,
         df = df[df['sport_demand'] > slider_threshold]
 
         # Map config
-        hover_data = ["sport_demand", "sport_demand"]
+        hover_data = ["sport_demand", "sport_distance"]
         size = df['sport_demand'].apply(lambda x: x ** (1 / 0.7))
 
     # Map
